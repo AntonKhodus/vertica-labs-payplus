@@ -1,6 +1,5 @@
 import PayPlus from "./payplus-api.js";
 import {Shopify, DataType} from '@shopify/shopify-api';
-import 'dotenv/config';
 
 export default class Core{
     constructor(){
