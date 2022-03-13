@@ -1,5 +1,6 @@
 import request from 'request';
 
+// class PayPlus contains method that receives specific data from certain PayPlus transaction
 export default class PayPlus{
 
   constructor(api_key, secret_key){

@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
-// Endpoint that receives Order data when it gets paid
+// Endpoint that receives Order data when it gets paid (order/paid shopify webhook)
 app.post('/paid', async (req, res) => {
     const order_id = req.body.id;
     const core = new Core();

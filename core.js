@@ -1,7 +1,9 @@
 import PayPlus from "./payplus-api.js";
 import {Shopify, DataType} from '@shopify/shopify-api';
 
+// class Core contains all logic for performing shopify and payplus synchronization
 export default class Core{
+    
     constructor(){
         this.shopify = new Shopify.Clients.Rest(process.env.SHOPIFY_STORE, process.env.SHOPIFY_ACCESS_KEY);
         this.payplus = new PayPlus(process.env.PAYPLUS_API_KEY, process.env.PAYPLUS_SECRET_KEY);
@@ -15,7 +17,6 @@ export default class Core{
         const formatted_date = `${year}-${month}-${day}`;
         return formatted_date;
     }
-
 
     // Gets last transaction from shopify order and verifies whether it was paid using PayPlus
     #getShopifyOrderPayplusTransaction = async (order_id) => {
