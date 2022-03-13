@@ -3,13 +3,13 @@ import {Shopify, DataType} from '@shopify/shopify-api';
 
 // class Core contains all logic for performing shopify and payplus synchronization
 export default class Core{
-    
+
     constructor(){
         this.shopify = new Shopify.Clients.Rest(process.env.SHOPIFY_STORE, process.env.SHOPIFY_ACCESS_KEY);
         this.payplus = new PayPlus(process.env.PAYPLUS_API_KEY, process.env.PAYPLUS_SECRET_KEY);
     }
 
-    // Fromats date in a ccertain way (YYYY-MM-DD)
+    // Fromats date in a specific way (YYYY-MM-DD)
     getFormattedDate = (date_obj) =>{
         const year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date_obj);
         const month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(date_obj);
