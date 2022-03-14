@@ -12,7 +12,7 @@ export default class PayPlus{
   getPaymentData = async (payment_id, date_obj) => {
     return new Promise((res,rej) => { 
       request({
-        proxy: process.env.QUOTAGUARDSTATIC_URL,
+        proxy: process.env.QUOTAGUARDSTATIC_URL, // Proxy to send requests from whitelisted static IP
         method: 'POST',
         url: 'https://restapi.payplus.co.il/api/v1.0/Transactions/View',
         headers: {
