@@ -10,8 +10,10 @@ export default class PayPlus{
 
   // Gets transaction by searching for certain "payment_id" (shopify order tansaction receipt) in PayPlus transactions list
   getPaymentData = async (payment_id, date_obj) => {
+    console.log(process.env.QUOTAGUARDSTATIC_URL);
     return new Promise((res,rej) => { 
       request({
+        proxy: process.env.QUOTAGUARDSTATIC_URL,
         method: 'POST',
         url: 'https://restapi.payplus.co.il/api/v1.0/Transactions/View',
         headers: {

@@ -18,7 +18,7 @@ export default class Core{
         return formatted_date;
     }
 
-    // Gets last transaction from shopify order and verifies whether it was paid using PayPlus
+    // Gets last transaction from Shopify Order and verifies whether it was paid using PayPlus
     #getShopifyOrderPayplusTransaction = async (order_id) => {
         let data = await this.shopify.get({
             path: `orders/${order_id}/transactions`,
