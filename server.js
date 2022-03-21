@@ -3,6 +3,7 @@ import express from "express";
 const app = express();
 const core = new Core();
 const PORT = process.env.PORT || 5000;
+const MANUAL = process.env.ALLOW_MANUAL || "false";
 
 app.use(express.json());
 
@@ -13,14 +14,22 @@ app.get("/", (req, res) => {
 // Test endpoint to manualy add payplus notes to order
 app.get('/manual/:id', async (req, res) => {
     const order_id = req.params.id;
-    try {
-        const data = await core.syncOrderData(order_id);
-        if(data.message === "success"){
-            res.sendStatus(200);
+    if(MANUAL === "true"){
+        try {
+            const data = await core.syncOrderData(order_id);
+            if(data.message === "success"){
+                res.sendStatus(200);
+            }
+        } catch (error) {
+            console.error(error);
+            res.sendStatus(500);        
         }
-    } catch (error) {
-        console.error(error);
-        res.sendStatus(500);        
+    } else if(MANUAL === "false") {
+        console.error('Manual endpoind is disabled. Check your ALLOW_MANUAL environment variable');
+        res.sendStatus(404);
+    } else {
+        console.error('Environment variable ALLOW_MANUAL is not set correctly. It should be either "true" or "false"');
+        res.sendStatus(500);
     }
 });
 
@@ -39,5 +48,5 @@ app.post('/paid', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`)
+    console.log(`Server listening on port ${PORT}`);
 })
